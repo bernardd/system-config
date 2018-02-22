@@ -1,3 +1,5 @@
+execute pathogen#infect()
+
 source $VIMRUNTIME/vimrc_example.vim
 
 set tabstop=4
@@ -7,6 +9,7 @@ set cursorline
 
 colorscheme koehler
 highlight Normal guibg=Black guifg=grey
+highlight ColorColumn guibg=grey8
 highlight Statement guifg=darkyellow
 highlight Comment guifg=cyan
 highlight Type guifg=darkgreen
@@ -26,7 +29,7 @@ set tags=tags;/,~/systags,erlang_tags;/
 set guioptions-=T
 set guioptions-=m
 
-set grepprg=grep\ --exclude=tags\ --exclude='*~'\ --exclude='\\\#*'\ --exclude='.*'\ --exclude='*.git*'\ --exclude='cscope.out'\ --exclude='*.d'\ --exclude='*.tmp'\ --exclude-dir='_build'\ --exclude-dir='log'\ -rInH\ \"$*\"\ .
+set grepprg=grep\ --exclude=tags\ --exclude='*~'\ --exclude='\\\#*'\ --exclude='.*'\ --exclude='*.git*'\ --exclude='cscope.out'\ --exclude='*.d'\ --exclude='*.tmp'\ --exclude-dir='_build'\ --exclude-dir='log'\ --exclude-dir='.git'\ -rInH\ \"$*\"\ .
 set makeprg=make\ -s\ -w\ -j\ 4
 set path=**
 set list
@@ -49,3 +52,17 @@ map <F10> :noh<CR>
 set wildignore=*.o,*.d,*~,*.beam
 
 au BufRead,BufNewFile *.erl.tmpl set filetype=erlang
+
+let &colorcolumn=join(range(81,999), ",")
+
+" Syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+"let g:syntastic_check_on_open = 1
+"let g:syntastic_check_on_wq = 0
+"let g:syntastic_enable_elixir_checker = 1
+"let g:syntastic_elixir_checkers = ['elixir']
